@@ -52,10 +52,10 @@ export default function Header({ locale }: HeaderProps) {
 	}
 
 	return (
-		<header className='sticky top-0 z-50 border-b border-white/10 bg-black/70 backdrop-blur-md'>
+		<header className='sticky top-0 z-50 border-b border-black/10 bg-white'>
 			<a
 				href='#main-content'
-				className='sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-white focus:px-3 focus:py-2 focus:text-black'
+				className='sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-black focus:px-3 focus:py-2 focus:text-white'
 			>
 				{t.skip}
 			</a>
@@ -67,7 +67,7 @@ export default function Header({ locale }: HeaderProps) {
 			>
 				<Link
 					href={`/${locale}`}
-					className='text-sm font-semibold uppercase tracking-[0.24em]'
+					className='text-sm font-semibold uppercase tracking-[0.24em] text-black'
 				>
 					{t.logo}
 				</Link>
@@ -75,25 +75,25 @@ export default function Header({ locale }: HeaderProps) {
 				<div className='hidden items-center gap-6 md:flex'>
 					<a
 						href='#hero'
-						className='text-sm text-white/80 transition hover:text-white'
+						className='text-sm text-black/70 transition hover:text-black'
 					>
 						{t.home}
 					</a>
 					<a
 						href='#showreel'
-						className='text-sm text-white/80 transition hover:text-white'
+						className='text-sm text-black/70 transition hover:text-black'
 					>
 						{t.showreel}
 					</a>
 					<a
 						href='#about'
-						className='text-sm text-white/80 transition hover:text-white'
+						className='text-sm text-black/70 transition hover:text-black'
 					>
 						{t.about}
 					</a>
 					<a
 						href='#contacts'
-						className='text-sm text-white/80 transition hover:text-white'
+						className='text-sm text-black/70 transition hover:text-black'
 					>
 						{t.contacts}
 					</a>
@@ -107,8 +107,8 @@ export default function Header({ locale }: HeaderProps) {
 							onClick={() => handleLocaleChange(item)}
 							className={`rounded-full border px-3 py-1 text-xs uppercase transition ${
 								item === locale
-									? 'border-white/30 bg-white text-black'
-									: 'border-white/15 text-white/75 hover:border-white/30 hover:text-white'
+									? 'border-black bg-black text-white'
+									: 'border-black/20 text-black/70 hover:border-black hover:text-black'
 							}`}
 						>
 							{item}

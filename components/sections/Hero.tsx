@@ -7,38 +7,48 @@ type HeroProps = {
 
 const translations = {
 	en: {
-		eyebrow: 'Actor • Action • Multilingual',
-		title: 'Cinematic presence for international casting.',
-		description:
-			'A scalable multilingual actor website built for visibility, fast contact, and future content growth.',
-		primaryCta: 'Watch showreel',
-		secondaryCta: 'Contact',
+		name: 'Khamit Arkayev',
+		subtitle: 'Actor • Action • Martial Arts',
+		playingAge: 'Playing age: 35–45',
+		location: 'Based in Kazakhstan',
+		languages: 'Languages: Kazakh • English • Russian • Korean',
+		primaryCta: 'Watch Showreel',
 	},
 	ru: {
-		eyebrow: 'Актёр • Экшен • Мультиязычность',
-		title: 'Кинематографичная подача для международного кастинга.',
-		description:
-			'Масштабируемый многоязычный сайт актёра для видимости, быстрого контакта и будущего роста контента.',
+		name: 'Khamit Arkayev',
+		subtitle: 'Актёр • Экшен • Боевые искусства',
+		playingAge: 'Игровой возраст: 35–45',
+		location: 'Базируется в Казахстане',
+		languages: 'Языки: казахский • английский • русский • корейский',
 		primaryCta: 'Смотреть шоурил',
-		secondaryCta: 'Контакты',
 	},
 	kk: {
-		eyebrow: 'Актер • Экшн • Көптілді',
-		title: 'Халықаралық кастингке арналған кинематографиялық имидж.',
-		description:
-			'Көріну, жылдам байланыс және болашақ контент кеңеюі үшін жасалған көптілді актер сайты.',
+		name: 'Khamit Arkayev',
+		subtitle: 'Актер • Экшн • Жекпе-жек өнері',
+		playingAge: 'Ойын жасы: 35–45',
+		location: 'Қазақстанда орналасқан',
+		languages: 'Тілдер: қазақ • ағылшын • орыс • корей',
 		primaryCta: 'Шоу-рилді көру',
-		secondaryCta: 'Байланыс',
 	},
 	ko: {
-		eyebrow: '배우 • 액션 • 다국어',
-		title: '국제 캐스팅을 위한 시네마틱한 존재감.',
-		description:
-			'노출, 빠른 연락, 향후 확장을 위해 제작된 확장 가능한 다국어 배우 웹사이트입니다.',
+		name: 'Khamit Arkayev',
+		subtitle: '배우 • 액션 • 무술',
+		playingAge: '연기 가능 연령: 35–45',
+		location: '카자흐스탄 기반',
+		languages: '언어: 카자흐어 • 영어 • 러시아어 • 한국어',
 		primaryCta: '쇼릴 보기',
-		secondaryCta: '연락처',
 	},
-} satisfies Record<AppLocale, Record<string, string>>
+} satisfies Record<
+	AppLocale,
+	{
+		name: string
+		subtitle: string
+		playingAge: string
+		location: string
+		languages: string
+		primaryCta: string
+	}
+>
 
 export default function Hero({ locale }: HeroProps) {
 	const t = translations[locale]
@@ -46,36 +56,47 @@ export default function Hero({ locale }: HeroProps) {
 	return (
 		<section
 			id='hero'
-			className='relative overflow-hidden border-b border-white/10 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.10),transparent_40%),linear-gradient(to_bottom,#111111,#050505)] py-24 sm:py-32'
+			className='relative min-h-[calc(100svh-4rem)] overflow-hidden bg-black text-white'
 		>
-			<Container>
-				<div className='max-w-4xl'>
-					<p className='mb-4 text-sm font-medium tracking-[0.2em] text-white/60 uppercase'>
-						{t.eyebrow}
-					</p>
+			<img
+				src='/images/hero-desktop.png'
+				alt='Khamit Arkayev hero'
+				className='absolute inset-0 hidden h-full w-full object-cover md:block'
+			/>
 
-					<h1 className='text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl'>
-						{t.title}
-					</h1>
+			<img
+				src='/images/hero-mobile.png'
+				alt='Khamit Arkayev hero'
+				className='absolute inset-0 h-full w-full object-cover md:hidden'
+			/>
 
-					<p className='mt-6 max-w-2xl text-base leading-7 text-white/70 sm:text-lg'>
-						{t.description}
-					</p>
+			<div className='absolute inset-0 bg-black/25' />
 
-					<div className='mt-8 flex flex-col gap-4 sm:flex-row'>
-						<a
-							href='#showreel'
-							className='inline-flex min-h-11 items-center justify-center rounded-full bg-white px-5 text-sm font-semibold text-black transition hover:opacity-90'
-						>
-							{t.primaryCta}
-						</a>
+			<Container className='relative z-10 h-[calc(100svh-4rem)]'>
+				<div className='flex h-full items-end pb-8 md:items-center md:justify-end md:pb-0'>
+					<div className='w-full max-w-xl'>
+						<h1 className='text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl [text-shadow:0_4px_24px_rgba(0,0,0,0.7)]'>
+							{t.name}
+						</h1>
 
-						<a
-							href='#contacts'
-							className='inline-flex min-h-11 items-center justify-center rounded-full border border-white/15 px-5 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/8'
-						>
-							{t.secondaryCta}
-						</a>
+						<p className='mt-4 text-base font-medium text-white sm:text-xl [text-shadow:0_2px_12px_rgba(0,0,0,0.65)]'>
+							{t.subtitle}
+						</p>
+
+						<div className='mt-6 space-y-2 text-sm leading-6 text-white sm:text-base [text-shadow:0_2px_14px_rgba(0,0,0,0.7)]'>
+							<p>{t.playingAge}</p>
+							<p>{t.location}</p>
+							<p>{t.languages}</p>
+						</div>
+
+						<div className='mt-8 flex flex-col gap-4 sm:flex-row'>
+							<a
+								href='#showreel'
+								className='inline-flex min-h-11 items-center justify-center rounded-full bg-white px-6 text-sm font-semibold text-black transition hover:opacity-90'
+							>
+								{t.primaryCta}
+							</a>
+						</div>
 					</div>
 				</div>
 			</Container>
