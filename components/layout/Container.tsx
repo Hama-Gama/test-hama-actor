@@ -1,17 +1,19 @@
-import type { ReactNode } from 'react'
+import type { ElementType, ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 
-type ContainerProps = {
+type ContainerProps<T extends ElementType = 'div'> = {
 	children: ReactNode
 	className?: string
-	as?: keyof JSX.IntrinsicElements
+	as?: T
 }
 
-export default function Container({
+export default function Container<T extends ElementType = 'div'>({
 	children,
 	className,
-	as: Tag = 'div',
-}: ContainerProps) {
+	as,
+}: ContainerProps<T>) {
+	const Tag = as ?? 'div'
+
 	return (
 		<Tag
 			className={cn('mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8', className)}
