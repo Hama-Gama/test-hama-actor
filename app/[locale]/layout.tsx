@@ -1,8 +1,14 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
+import { Inter } from 'next/font/google'
 import { notFound } from 'next/navigation'
 import { locales, isSupportedLocale } from '@/lib/i18n'
 import { getLocalizedMetadata } from '@/lib/metadata'
+
+const inter = Inter({
+	subsets: ['latin', 'cyrillic'],
+	display: 'swap',
+})
 
 type Props = {
 	children: ReactNode
@@ -27,5 +33,5 @@ export default async function LocaleLayout({ children, params }: Props) {
 		notFound()
 	}
 
-	return <>{children}</>
+	return <div className={inter.className}>{children}</div>
 }
