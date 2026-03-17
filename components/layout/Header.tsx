@@ -1,9 +1,12 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
+import { Squash as Hamburger } from 'hamburger-react'
 import Container from '@/components/layout/Container'
 import type { AppLocale } from '@/lib/constants'
-import { locales, localeCookieName } from '@/lib/i18n'
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher'
 
 type HeaderProps = {
 	locale: AppLocale
@@ -46,9 +49,10 @@ const translations = {
 
 export default function Header({ locale }: HeaderProps) {
 	const t = translations[locale]
+	const [isOpen, setOpen] = useState(false)
 
-	const handleLocaleChange = (nextLocale: AppLocale) => {
-		document.cookie = `${localeCookieName}=${nextLocale}; path=/; max-age=31536000; samesite=lax`
+	const handleNavClick = () => {
+		setOpen(false)
 	}
 
 	return (
@@ -65,57 +69,90 @@ export default function Header({ locale }: HeaderProps) {
 				className='flex h-16 items-center justify-between'
 				aria-label='Primary'
 			>
-				<Link
-					href={`/${locale}`}
-					className='text-sm font-semibold uppercase tracking-[0.24em] text-black'
-				>
-					{t.logo}
+				<Link href={`/${locale}`} onClick={handleNavClick}>
+					<Image
+						src='/logo.png'
+						alt={t.logo}
+						width={40}
+						height={40}
+						className='h-10 w-10 rounded-full object-cover shadow-2xl'
+						priority
+					/>
 				</Link>
 
 				<div className='hidden items-center gap-6 md:flex'>
-					<a
-						href='#hero'
-						className='text-sm text-black/70 transition hover:text-black'
-					>
+					<a href='#hero' className='text-sm text-black/70 hover:text-black'>
 						{t.home}
 					</a>
 					<a
 						href='#showreel'
-						className='text-sm text-black/70 transition hover:text-black'
+						className='text-sm text-black/70 hover:text-black'
 					>
 						{t.showreel}
 					</a>
-					<a
-						href='#about'
-						className='text-sm text-black/70 transition hover:text-black'
-					>
+					<a href='#about' className='text-sm text-black/70 hover:text-black'>
 						{t.about}
 					</a>
 					<a
 						href='#contacts'
-						className='text-sm text-black/70 transition hover:text-black'
+						className='text-sm text-black/70 hover:text-black'
 					>
 						{t.contacts}
 					</a>
 				</div>
 
-				<div className='flex items-center gap-2'>
-					{locales.map(item => (
-						<Link
-							key={item}
-							href={`/${item}`}
-							onClick={() => handleLocaleChange(item)}
-							className={`rounded-full border px-3 py-1 text-xs uppercase transition ${
-								item === locale
-									? 'border-black bg-black text-white'
-									: 'border-black/20 text-black/70 hover:border-black hover:text-black'
-							}`}
-						>
-							{item}
-						</Link>
-					))}
+				<div className='flex items-center gap-6'>
+					<LanguageSwitcher locale={locale} />
+
+					<div className='md:hidden'>
+						<Hamburger
+							toggled={isOpen}
+							toggle={setOpen}
+							size={22}
+							color='#000000'
+							label='Show menu'
+							rounded
+						/>
+					</div>
 				</div>
 			</Container>
+
+			{isOpen && (
+				<div className='absolute left-0 top-full z-50 w-full border-t border-black/10 bg-white md:hidden'>
+					<Container className='py-4'>
+						<div className='flex flex-col gap-4'>
+							<a
+								href='#hero'
+								onClick={handleNavClick}
+								className='text-base text-black'
+							>
+								{t.home}
+							</a>
+							<a
+								href='#showreel'
+								onClick={handleNavClick}
+								className='text-base text-black'
+							>
+								{t.showreel}
+							</a>
+							<a
+								href='#about'
+								onClick={handleNavClick}
+								className='text-base text-black'
+							>
+								{t.about}
+							</a>
+							<a
+								href='#contacts'
+								onClick={handleNavClick}
+								className='text-base text-black'
+							>
+								{t.contacts}
+							</a>
+						</div>
+					</Container>
+				</div>
+			)}
 		</header>
 	)
 }
