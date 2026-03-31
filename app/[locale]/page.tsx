@@ -3,7 +3,6 @@ import Header from '@/components/layout/Header'
 import Hero from '@/components/sections/Hero'
 import { isSupportedLocale } from '@/lib/i18n'
 import type { AppLocale } from '@/lib/constants'
-import { Filmography } from '@/components/sections/Filmography'
 import ShowReel from '@/components/sections/ShowReel'
 
 type Props = {
@@ -22,7 +21,6 @@ export default async function HomePage({ params }: Props) {
 
 				<ShowReel />
 
-				<Filmography />
 			</main>
 			<Footer locale={safeLocale} />
 		</>
